@@ -1,0 +1,15 @@
+org/foo/app/AppCommand3.class
+org/foo/task/TimerTaskTest.class
+org/foo/app/LearningSwitchSolution$SwitchPacketProcessor.class
+org/foo/app/LearningSwitchSolution$1.class
+org/foo/app/Cluster$1.class
+org/foo/app/Cluster$SwitchPacketProcessor.class
+org/foo/app/AppComponent.class
+org/foo/app/GetAll.class
+org/foo/app/LearningSwitchSolution.class
+org/foo/app/AppCommand.class
+org/foo/net/lib/ListSwitchs.class
+org/foo/app/Cluster.class
+org/foo/app/GetHost.class
+org/foo/net/lib/ListHosts.class
+org/foo/app/AppCommand2.class
