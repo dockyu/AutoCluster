@@ -95,6 +95,8 @@ public class Cluster {
 	List<Device> devices;
     List<Host> two_hosts;
 
+    Timer timer = new Timer();
+
     /**
      * Create a variable of the SwitchPacketProcessor class using the PacketProcessor defined above.
      * Activates the app.
@@ -110,7 +112,7 @@ public class Cluster {
 
 
         // start timer task
-        Timer timer = new Timer();
+        
         TimerTaskTest task = new TimerTaskTest(two_hosts);
         timer.schedule(task, 1000, 5000);
 
@@ -143,6 +145,9 @@ public class Cluster {
     protected void deactivate() {
         log.info("Stopped");
         packetService.removeProcessor(processor);
+
+        timer.cancel();
+        timer.purge();
     }
 
     /**
@@ -215,11 +220,15 @@ public class Cluster {
             macTable.put(srcMac, cp.port());
             PortNumber outPort = macTable.get(dstMac);
 
+
+            if ( two_hosts.size()<2 ){
+                actLikeHub(pc);
+            }
+
             // if src in the cluster
             
-            if(two_hosts.size()<2 || srcMac.toString().equals(two_hosts.get(0).mac().toString()) || srcMac.toString().equals(two_hosts.get(1).mac().toString())){
+            if( srcMac.toString().equals(two_hosts.get(0).mac().toString()) || srcMac.toString().equals(two_hosts.get(1).mac().toString())){
 
-            log.info("in the if");
                 /*
                 * If port is known, set pc's out port to the packet's learned output port and construct a
                 * FlowRule using a source, destination, treatment and other properties. Send the FlowRule
